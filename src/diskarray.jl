@@ -1,5 +1,5 @@
 using DiskArrays
-using Images
+using Colors
 import SlideDiskArrays.LibOpenSlide:
     openslide_t, openslide_get_level_dimensions, openslide_read_region, openslide_close
 
@@ -16,7 +16,7 @@ struct SlideDiskArray{T,N} <: DiskArrays.AbstractDiskArray{T,N}
         openslide_get_level_dimensions(osr, level, w, h)
 
         # This is nessecary since data read by openslide is in ARGB format
-        # The data returned by read_region is in UInt32 format so the associated Images.jl type
+        # The data returned by read_region is in UInt32 format so the associated Colors.jl type
         # is RGB24
         T = RGB24
 
