@@ -1,0 +1,12 @@
+# Changes here will be overwritten by Copier
+Authors: Chris Damour <damourchris@pm.me>
+JuliaMinVersion: '1.10'
+License: MIT
+LicenseCopyrightHolders: Chris Damour
+PackageName: SlideDiskArrays
+PackageOwner: damourChris
+PackageUUID: c4a4c3dd-55a5-5e1c-9058-bcd50f97b5e9
+StrategyConfirmIncluded: false
+StrategyLevel: 1
+StrategyReviewExcluded: false
+_src_path: /home/damourchris/.julia/packages/BestieTemplate/jdG8v
