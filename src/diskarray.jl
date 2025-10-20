@@ -3,7 +3,7 @@ using Colors
 import SlideDiskArrays.LibOpenSlide:
     openslide_t, openslide_get_level_dimensions, openslide_read_region, openslide_close
 
-struct SlideDiskArray{T,N} <: DiskArrays.AbstractDiskArray{T,N}
+mutable struct SlideDiskArray{T,N} <: DiskArrays.AbstractDiskArray{T,N}
     osr::Ptr{openslide_t}
     level::Int
     size::NTuple{N,Int}
@@ -15,16 +15,28 @@ struct SlideDiskArray{T,N} <: DiskArrays.AbstractDiskArray{T,N}
 
         openslide_get_level_dimensions(osr, level, w, h)
 
+        if w[] <= 0 || h[] <= 0
+            throw(ArgumentError("Invalid level $level for the given slide."))
+        end
+
         # This is nessecary since data read by openslide is in ARGB format
         # The data returned by read_region is in UInt32 format so the associated Colors.jl type
         # is RGB24
         T = RGB24
 
-        slide_disk_array = SlideDiskArray{T,2}(osr, level, (w[], h[]))
-        finalizer(openslide_close, osr)
+        slide_disk_array = new{T,2}(osr, level, (w[], h[]))
+
+        finalizer(slide_disk_array) do s
+            if s.osr != C_NULL
+                openslide_close(s.osr)
+            end
+        end
         return slide_disk_array
+        # return slide_disk_array
     end
 end
+
+Base.unsafe_convert(::Type{Ptr{openslide_t}}, engine::SlideDiskArray) = engine.ptr
 
 
 # DiskArrays interface
