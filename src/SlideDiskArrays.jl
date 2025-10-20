@@ -1,5 +1,7 @@
 module SlideDiskArrays
 
+using Images
+
 const IS_LIBC_MUSL = occursin("musl", Base.BUILD_TRIPLET)
 if Sys.isapple() && Sys.ARCH === :aarch64
     include("../lib/aarch64-apple-darwin20.jl")
@@ -35,5 +37,6 @@ end
 include("diskarray.jl")
 export SlideDiskArray
 
+include("io.jl")
 
 end
