@@ -32,4 +32,8 @@ else
 end
 
 
+include("diskarray.jl")
+export SlideDiskArray
+
+
 end
