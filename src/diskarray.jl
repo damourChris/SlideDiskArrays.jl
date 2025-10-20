@@ -1,5 +1,4 @@
 using DiskArrays
-using Colors
 import SlideDiskArrays.LibOpenSlide:
     openslide_t, openslide_get_level_dimensions, openslide_read_region, openslide_close
 
