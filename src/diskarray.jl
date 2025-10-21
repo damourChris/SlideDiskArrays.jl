@@ -55,6 +55,12 @@ function DiskArrays.readblock!(
     w = length(xrange)
     h = length(yrange)
 
+    # We need to scale the coords since openslide_read_region expects coordinates in level 0
+    factor = SlideDiskArrays.LibOpenSlide.openslide_get_level_downsample(A.osr, A.level)
+    x = Int(floor(x * factor))
+    y = Int(floor(y * factor))
+
+
     # Reshape the input array to be a UInt32 view to pass to openslide
     aout_view = reinterpret(reshape, UInt32, aout)
 
