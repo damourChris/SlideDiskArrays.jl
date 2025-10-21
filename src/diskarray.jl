@@ -42,7 +42,7 @@ Base.unsafe_convert(::Type{Ptr{openslide_t}}, engine::SlideDiskArray) = engine.p
 
 Base.size(A::SlideDiskArray) = A.size
 DiskArrays.haschunks(A::SlideDiskArray) = DiskArrays.Chunked()
-DiskArrays.eachchunk(A::SlideDiskArray) = DiskArrays.GridChunks(A, (256,256))
+DiskArrays.eachchunk(A::SlideDiskArray) = DiskArrays.GridChunks(A, (1024,1024))
 
 function DiskArrays.readblock!(
     A::SlideDiskArray{T,2},
