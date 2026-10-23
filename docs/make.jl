@@ -1,5 +1,6 @@
 using SlideDiskArrays
 using Documenter
+import Documenter: Remotes.GitHub
 
 DocMeta.setdocmeta!(SlideDiskArrays, :DocTestSetup, :(using SlideDiskArrays); recursive = true)
 
@@ -12,7 +13,7 @@ const numbered_pages = [
 makedocs(;
     modules = [SlideDiskArrays],
     authors = "Chris Damour <damourchris@pm.me>",
-    repo = "https://github.com/damourChris/SlideDiskArrays.jl/blob/{commit}{path}#{line}",
+    repo = GitHub("damourChris", "SlideDiskArrays.jl"),
     sitename = "SlideDiskArrays.jl",
     format = Documenter.HTML(; canonical = "https://damourChris.github.io/SlideDiskArrays.jl"),
     pages = ["index.md"; numbered_pages],
