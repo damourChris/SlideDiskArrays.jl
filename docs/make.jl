@@ -17,6 +17,7 @@ makedocs(;
     sitename = "SlideDiskArrays.jl",
     format = Documenter.HTML(; canonical = "https://damourChris.github.io/SlideDiskArrays.jl"),
     pages = ["index.md"; numbered_pages],
+    checkdocs = :exports
 )
 
 deploydocs(; repo = "github.com/damourChris/SlideDiskArrays.jl")
