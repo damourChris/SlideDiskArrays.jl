@@ -35,7 +35,7 @@ mutable struct SlideDiskArray{T,N} <: DiskArrays.AbstractDiskArray{T,N}
     end
 end
 
-Base.unsafe_convert(::Type{Ptr{openslide_t}}, engine::SlideDiskArray) = engine.ptr
+Base.unsafe_convert(::Type{Ptr{openslide_t}}, engine::SlideDiskArray) = engine.osr
 
 
 # DiskArrays interface
