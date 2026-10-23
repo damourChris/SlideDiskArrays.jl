@@ -2,10 +2,10 @@ using DiskArrays
 import SlideDiskArrays.LibOpenSlide:
     openslide_t, openslide_get_level_dimensions, openslide_read_region, openslide_close
 
-mutable struct SlideDiskArray{T,N} <: DiskArrays.AbstractDiskArray{T,N}
+mutable struct SlideDiskArray{T, N} <: DiskArrays.AbstractDiskArray{T, N}
     osr::Ptr{openslide_t}
     level::Int
-    size::NTuple{N,Int}
+    size::NTuple{N, Int}
 
     function SlideDiskArray(osr::Ptr{openslide_t}, level::Int)
         # Allocate the w, h
@@ -23,7 +23,7 @@ mutable struct SlideDiskArray{T,N} <: DiskArrays.AbstractDiskArray{T,N}
         # is RGB24
         T = RGB24
 
-        slide_disk_array = new{T,2}(osr, level, (w[], h[]))
+        slide_disk_array = new{T, 2}(osr, level, (w[], h[]))
 
         finalizer(slide_disk_array) do s
             if s.osr != C_NULL
@@ -42,13 +42,13 @@ Base.unsafe_convert(::Type{Ptr{openslide_t}}, engine::SlideDiskArray) = engine.o
 
 Base.size(A::SlideDiskArray) = A.size
 DiskArrays.haschunks(A::SlideDiskArray) = DiskArrays.Chunked()
-DiskArrays.eachchunk(A::SlideDiskArray) = DiskArrays.GridChunks(A, (1024,1024))
+DiskArrays.eachchunk(A::SlideDiskArray) = DiskArrays.GridChunks(A, (1024, 1024))
 
 function DiskArrays.readblock!(
-    A::SlideDiskArray{T,2},
-    aout,
-    r::Vararg{AbstractUnitRange,2},
-) where {T}
+        A::SlideDiskArray{T, 2},
+        aout,
+        r::Vararg{AbstractUnitRange, 2},
+    ) where {T}
     xrange, yrange = r
     x = first(xrange) - 1
     y = first(yrange) - 1
@@ -71,4 +71,3 @@ function DiskArrays.readblock!(
 
     return aout_view
 end
-
