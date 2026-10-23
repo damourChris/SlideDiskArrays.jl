@@ -1,6 +1,6 @@
 import SlideDiskArrays.LibOpenSlide: openslide_open
 
-function load(filepath::AbstractString; level::Int = 0)
+function load_slide(filepath::AbstractString; level::Int = 0)
     osr = openslide_open(filepath)
 
     if osr == C_NULL

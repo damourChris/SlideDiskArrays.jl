@@ -38,5 +38,6 @@ include("diskarray.jl")
 export SlideDiskArray
 
 include("io.jl")
+export load_slide
 
 end
