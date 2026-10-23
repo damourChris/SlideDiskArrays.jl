@@ -2,6 +2,19 @@ using DiskArrays
 import SlideDiskArrays.LibOpenSlide:
     openslide_t, openslide_get_level_dimensions, openslide_read_region, openslide_close
 
+
+"""
+    SlideDiskArray{T, N}
+
+
+Represent a Slide object using the DiskArrays interface to map disk memory to disk memory.
+
+## Fields
+
+osr::Ptr{openslide_t}
+level::Int
+size::NTuple{N, Int}
+"""
 mutable struct SlideDiskArray{T, N} <: DiskArrays.AbstractDiskArray{T, N}
     osr::Ptr{openslide_t}
     level::Int

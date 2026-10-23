@@ -12,6 +12,7 @@ Pages = ["95-reference.md"]
 Pages = ["95-reference.md"]
 ```
 
-```@autodocs
-Modules = [SlideDiskArrays]
+```@docs
+SlideDiskArray
+load_slide
 ```
