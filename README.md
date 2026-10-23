@@ -10,7 +10,7 @@
 This is a simple julia package that use `libopenslide` to read data from Slide files. It
 implements the `AbstractDiskArray` from DiskArrays.jl to not have to load all data in memory.
 
-Open an slide with `load(slide_path)` and pass a level if needed. You can then index the
+Open an slide with `load_slide(slide_path)` and pass a level if needed. You can then index the
 returned `SlideDiskArray` to read data from the slide.
 
 Each pixel is represented as an `RGB24` value from the Images.jl package.
